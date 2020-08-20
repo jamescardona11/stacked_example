@@ -4,8 +4,8 @@ import 'package:stacked_example_app/ui/views/startupview/startup_view.dart';
 
 @MaterialAutoRouter(
   routes: [
-    MaterialRoute(page: HomeView, initial: true),
-    MaterialRoute(page: StartUpView),
+    MaterialRoute(page: StartUpView, initial: true),
+    MaterialRoute(page: HomeView),
   ],
 )
 class $Router {}
