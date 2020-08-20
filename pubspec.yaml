@@ -17,6 +17,8 @@ dependencies:
   stacked_services: ^0.5.2
   flutter_hooks:
   stacked_hooks: ^0.1.1+3
+  observable_ish:
+
 
 
 dev_dependencies:
