@@ -7,7 +7,6 @@ import 'package:stacked_example_app/ui/views/solidexample/solid_example.dart';
 class PostsViewModel extends FutureViewModel<List<Post>> {
   final _postsService = locator<PostsService>();
 
-
   @override
   Future<List<Post>> futureToRun() => _postsService.getPostsForUser(3);
 }
