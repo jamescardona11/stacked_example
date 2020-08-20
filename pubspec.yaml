@@ -19,6 +19,7 @@ dependencies:
   stacked_hooks: ^0.1.1+3
   observable_ish:
   image_picker: ^0.6.7+4
+  http:
 
 
 

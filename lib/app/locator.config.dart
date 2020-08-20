@@ -9,6 +9,7 @@ import 'package:injectable/injectable.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 import '../ui/views/reactiveexample/reactive_example_view.dart';
+import '../services/media_service.dart';
 import '../services/third_party_services_module.dart';
 
 /// adds generated dependencies
@@ -23,6 +24,7 @@ GetIt $initGetIt(
   final thirdPartyServicesModule = _$ThirdPartyServicesModule();
   gh.lazySingleton<CounterService>(() => CounterService());
   gh.lazySingleton<DialogService>(() => thirdPartyServicesModule.dialogService);
+  gh.lazySingleton<MediaService>(() => MediaService());
   gh.lazySingleton<NavigationService>(
       () => thirdPartyServicesModule.navigationService);
   return get;
