@@ -11,14 +11,14 @@ class HomeViewMultipleWidgets extends StatelessWidget {
       viewModelBuilder: () => HomeViewModel(),
       onModelReady: (model) => model.initialise(),
       builder: (context, model, _) => Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            model.updateTitle();
-          },
-        ),
+        floatingActionButton: UpdateTitleButton(),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[TitleSection(), DescriptionSection()],
+          children: <Widget>[
+            TitleSection(),
+            DescriptionSection(),
+            //UpdateTitleButton(),
+          ],
         ),
       ),
     );
@@ -55,6 +55,21 @@ class DescriptionSection extends ViewModelWidget<HomeViewModel> {
           child: Text('${model.title} ${Random().nextInt(5)}'),
         ),
       ],
+    );
+  }
+}
+
+class UpdateTitleButton extends ViewModelWidget<HomeViewModel> {
+  const UpdateTitleButton({
+    Key key,
+  }) : super(key: key, reactive: false);
+
+  @override
+  Widget build(BuildContext context, model) {
+    return FloatingActionButton(
+      onPressed: () {
+        model.updateTitle();
+      },
     );
   }
 }

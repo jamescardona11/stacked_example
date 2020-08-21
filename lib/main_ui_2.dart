@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked_example_app/main.dart';
+import 'package:stacked_example_app/ui2/busyexample/widget_one.dart';
 import 'package:stacked_example_app/ui2/home/home_view.dart';
 
 import 'ui2/nonreactiveexample/home_view_multiples_wigets.dart';
@@ -24,5 +25,6 @@ class MainUI2View extends StatelessWidget {
   final Map<String, Widget> screens = {
     'Home View': HomeView(),
     'Multiples Widgets (NonReactive)': HomeViewMultipleWidgets(),
+    'Busy Widget': WidgetOne(),
   };
 }
