@@ -41,6 +41,8 @@ GetIt $initGetIt(
   gh.lazySingleton<PermissionsService>(() => PermissionsService());
   gh.lazySingleton<PostsService>(() => PostsService());
   gh.lazySingleton<SharedPreferencesService>(() => SharedPreferencesService());
+  gh.lazySingleton<SnackbarService>(
+      () => thirdPartyServicesModule.snackbarService);
 
   // Eager singletons must be registered in the right order
   gh.singleton<PostsViewModel>(PostsViewModel());
@@ -52,4 +54,6 @@ class _$ThirdPartyServicesModule extends ThirdPartyServicesModule {
   DialogService get dialogService => DialogService();
   @override
   NavigationService get navigationService => NavigationService();
+  @override
+  SnackbarService get snackbarService => SnackbarService();
 }
