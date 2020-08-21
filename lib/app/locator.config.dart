@@ -15,6 +15,7 @@ import '../services/counter_service.dart' as stacked_example_app;
 import '../services/media_service.dart';
 import '../services/permissions_service.dart';
 import '../services/posts_service.dart';
+import '../ui/views/posts_example/posts_viewmodel.dart';
 import '../services/shared_preferences_service.dart';
 import '../services/third_party_services_module.dart';
 
@@ -40,6 +41,9 @@ GetIt $initGetIt(
   gh.lazySingleton<PermissionsService>(() => PermissionsService());
   gh.lazySingleton<PostsService>(() => PostsService());
   gh.lazySingleton<SharedPreferencesService>(() => SharedPreferencesService());
+
+  // Eager singletons must be registered in the right order
+  gh.singleton<PostsViewModel>(PostsViewModel());
   return get;
 }
 

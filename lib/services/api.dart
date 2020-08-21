@@ -2,7 +2,9 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
-import 'package:stacked_example_app/ui/views/solidexample/solid_example.dart';
+import 'package:stacked_example_app/datamodels/comment.dart';
+import 'package:stacked_example_app/datamodels/post.dart';
+import 'package:stacked_example_app/datamodels/user.dart';
 
 @lazySingleton
 class Api {

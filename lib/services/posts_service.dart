@@ -1,7 +1,8 @@
 import 'package:injectable/injectable.dart';
 import 'package:stacked_example_app/app/locator.dart';
-import 'package:stacked_example_app/services/api.dart';
-import 'package:stacked_example_app/ui/views/solidexample/solid_example.dart';
+import 'package:stacked_example_app/datamodels/post.dart';
+
+import 'api.dart';
 
 @lazySingleton
 class PostsService {

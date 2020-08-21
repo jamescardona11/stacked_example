@@ -62,8 +62,6 @@ PermissionsMock getAndRegisterPermissionMock() {
 }
 */
 
-
-
 void _removeRegistrationIfExists<T>() {
   if (locator.isRegistered<T>()) {
     locator.unregister<T>();
@@ -74,7 +72,7 @@ void registerServices() {
   getAndRegisterSharedPreferencesMock();
   getAndRegisterNavigationServiceMock();
   getAndRegisterAppDatabaseMock();
-  getAndRegisterPermissionMock();
+  //getAndRegisterPermissionMock();
 }
 
 void unregisterServices() {
