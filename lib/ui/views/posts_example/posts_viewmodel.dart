@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_example_app/app/locator.dart';
@@ -12,5 +13,9 @@ class PostsViewModel extends FutureViewModel<List<Post>> {
   Future<List<Post>> futureToRun() {
     print('Fetch posts');
     return _postsService.getPostsForUser(3);
+  }
+
+  void initialize() {
+    debugPrint('Initialize Posts');
   }
 }

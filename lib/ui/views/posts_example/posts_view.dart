@@ -12,6 +12,8 @@ class PostsView extends StatelessWidget {
     return ViewModelBuilder<PostsViewModel>.reactive(
       disposeViewModel: false,
       initialiseSpecialViewModelsOnce: true,
+      fireOnModelReadyOnce: true,
+      onModelReady: (model) => model.initialize(),
       builder: (context, model, child) => Scaffold(
         backgroundColor: Colors.grey[900],
         body: model.isBusy

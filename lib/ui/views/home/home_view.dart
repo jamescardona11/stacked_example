@@ -4,10 +4,13 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_example_app/ui/views/home/home_viewmodel.dart';
 import 'package:stacked_example_app/ui/views/posts_example/posts_view.dart';
 import 'package:stacked_example_app/ui/views/todo/todo_view.dart';
+import 'dart:math';
 
 class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    debugPrint('Call in Build HomeView Ui2 ${Random().nextInt(15)}');
+
     return ViewModelBuilder<HomeViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
         bottomNavigationBar: BottomNavigationBar(
@@ -45,6 +48,7 @@ class HomeView extends StatelessWidget {
         ),
       ),
       viewModelBuilder: () => HomeViewModel(),
+      onModelReady: (model) => model.initialize(),
     );
   }
 

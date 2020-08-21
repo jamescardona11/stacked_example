@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
 class TodoViewModel extends BaseViewModel {
@@ -11,5 +12,9 @@ class TodoViewModel extends BaseViewModel {
   void addTodo(String text) {
     _todos.add(text);
     notifyListeners();
+  }
+
+  void initialize() {
+    debugPrint('Initialize Todo');
   }
 }

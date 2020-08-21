@@ -10,6 +10,9 @@ class TodoView extends HookWidget {
   Widget build(BuildContext context) {
     var todo = useTextEditingController();
     return ViewModelBuilder<TodoViewModel>.reactive(
+      onModelReady: (model) => model.initialize(),
+      initialiseSpecialViewModelsOnce: true,
+      disposeViewModel: false,
       builder: (context, model, child) => SafeArea(
         child: Scaffold(
           floatingActionButton: FloatingActionButton(

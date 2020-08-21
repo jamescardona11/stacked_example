@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:stacked_example_app/app/router.gr.dart' as RouterGr;
+import 'package:stacked_example_app/main_ui.dart';
+import 'package:stacked_example_app/main_ui_2.dart';
 import 'package:stacked_example_app/ui/views/dialog_example/setup_dialog_ui.dart';
-import 'package:stacked_example_app/ui/views/futureexample/future_example_view.dart';
-import 'package:stacked_example_app/ui/views/futureexample/future_example_viewmodel.dart';
-import 'package:stacked_example_app/ui/views/home/home_view.dart';
-import 'package:stacked_example_app/ui/views/partialbuild/partial_builds_view.dart';
-import 'package:stacked_example_app/ui/views/reactiveexample/reactive_example_view.dart';
-import 'package:stacked_example_app/ui/views/streamexample/stream_example_view.dart';
+import 'package:stacked_example_app/ui2/home/home_view.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 import 'app/locator.dart';
-import 'ui/views/dialog_example/dialog_example_view.dart';
 
 void main() {
   setupLocator();
@@ -25,8 +21,49 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Material App',
       //onGenerateRoute: RouterGr.Router(),
-      home: DialogExampleView(),
+      home: _NavigatorIntern(),
       navigatorKey: locator<NavigationService>().navigatorKey,
     );
   }
+}
+
+class _NavigatorIntern extends StatelessWidget {
+  final Map<String, Widget> screens = {
+    'UI': MainUIView(),
+    'UI 2': MainUI2View(),
+  };
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        child: ListView(
+          children: convertMapToList(context, screens),
+        ),
+      ),
+    );
+  }
+}
+
+List<Widget> convertMapToList(BuildContext context, screens) {
+  List<Widget> listItems = [];
+  screens.forEach(
+    (key, value) => listItems.add(
+      Card(
+        child: ListTile(
+          title: Text(
+            key,
+            style: TextStyle(),
+          ),
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => value));
+          },
+        ),
+      ),
+    ),
+  );
+
+  return listItems;
 }
