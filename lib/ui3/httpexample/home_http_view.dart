@@ -2,58 +2,64 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:stacked_example_app/datamodels/api_response_mode.dart';
+import 'home_http_viewmodel.dart';
+import 'package:stacked/stacked.dart';
 
-class HttpHomeView extends StatefulWidget {
-  @override
-  _HttpHomeViewState createState() => _HttpHomeViewState();
-}
-
-class _HttpHomeViewState extends State<HttpHomeView> {
-  APIResponseModel apiResponseModel;
-  bool isLoading = false;
-
+class HttpHomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return ViewModelBuilder<HomeScreenViewModel>.reactive(
+      viewModelBuilder: () => HomeScreenViewModel(),
+      builder: (context, model, child) => Scaffold(
+          body: Container(
         color: Colors.white,
         child: SafeArea(
-            child: Scaffold(
-          appBar: AppBar(
-            title: Text("Networking Example"),
+          child: Scaffold(
+            appBar: buildAppBar(),
+            body: buildBody(model),
+            floatingActionButton: buildFloatingActionButton(model),
           ),
-          body: Container(child: Center(child: buildDataWidget())),
-          floatingActionButton: FloatingActionButton(
-            child: isLoading
-                ? CircularProgressIndicator(
-                    backgroundColor: Colors.white,
-                  )
-                : Icon(Icons.cloud_download),
-            tooltip: "Get Data from API",
-            onPressed: () => getDataFromAPI(),
-          ),
-        )));
+        ),
+      )),
+    );
   }
 
-  void getDataFromAPI() async {
-    setState(() {
-      isLoading = true;
-    });
-    const String API_URL = "https://corona.lmao.ninja/v2/all";
-    var response = await http.get(Uri.parse(API_URL));
-    var parsedJson = await json.decode(response.body);
-    setState(() {
-      apiResponseModel = APIResponseModel.fromJson(parsedJson);
-      isLoading = false;
-    });
+  AppBar buildAppBar() {
+    return AppBar(
+      title: Text("Networking Like a Pro"),
+    );
   }
 
-  buildDataWidget() {
+  Widget buildBody(viewModel) {
+    /// building our UI
+    /// notice we are observing viewModel.apiResponseModel
+    /// Hence buildDataWidget will rebuild when apiResponse changes in ViewModel
+    return Container(child: Center(child: buildDataWidget(viewModel)));
+  }
+
+  FloatingActionButton buildFloatingActionButton(viewModel) {
+    return FloatingActionButton(
+      child: viewModel.isLoading
+          ? CircularProgressIndicator(
+              backgroundColor: Colors.white,
+            )
+          : Icon(Icons.cloud_download),
+      tooltip: "Get Data from API",
+
+      /// Calling our viewModel function
+      onPressed: () => viewModel.getDataFromAPI(),
+    );
+  }
+
+  buildDataWidget(viewModel) {
+    APIResponseModel apiResponseModel = viewModel.apiResponseModel;
+
     if (apiResponseModel == null)
       return Container(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Text(
-            "Press the floating action button to get data",
+            "${viewModel.messageToShow}",
             style: TextStyle(fontSize: 24),
             textAlign: TextAlign.center,
           ),
@@ -71,7 +77,6 @@ class _HttpHomeViewState extends State<HttpHomeView> {
         "Cases per million: ${apiResponseModel.casesPerOneMillion}\n"
         "Deaths per million: ${apiResponseModel.deathsPerOneMillion}\n"
         "Total Tests Done: ${apiResponseModel.tests}\n"
-        "Tests per million: ${apiResponseModel.testsPerOneMillion}\n"
         "Affected countires : ${apiResponseModel.affectedCountries}\n",
         style: TextStyle(fontSize: 18),
       );

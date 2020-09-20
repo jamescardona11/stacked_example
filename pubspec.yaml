@@ -22,6 +22,7 @@ dependencies:
   http:
   email_validator:
   animations: ^1.1.1
+  provider: ^4.3.2+2
 
 
 
