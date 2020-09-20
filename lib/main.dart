@@ -7,6 +7,7 @@ import 'package:stacked_example_app/ui2/home/home_view.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 import 'app/locator.dart';
+import 'main_ui_3.dart';
 
 void main() {
   setupLocator();
@@ -31,6 +32,7 @@ class _NavigatorIntern extends StatelessWidget {
   final Map<String, Widget> screens = {
     'UI': MainUIView(),
     'UI 2': MainUI2View(),
+    'UI 3': MainUI3View(),
   };
 
   @override

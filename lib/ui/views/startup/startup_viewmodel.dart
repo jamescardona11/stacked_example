@@ -11,6 +11,7 @@ class StartupViewModel extends BaseViewModel {
   final _database = locator<AppDatabase>();
 
   Future initialise() async {
+    print('MODEL');
     var hasUser = _sharedPreferencesService.hasUser;
 
     if (hasUser) {
